@@ -10,12 +10,27 @@ class ProductProvider extends Component {
     products: storeProducts,
     detailProduct: detailProduct,
   };
+  componentDidMount(){
+    this.setProducts()
+  }
+
+  setProducts = () => {
+    let tempProducts = [];
+    storeProducts.forEach(item => {
+      const singleItem ={ ...item};
+      tempProducts = [...tempProducts ,singleItem]
+    });
+    this.setState(() => {
+      return {products:tempProducts};
+    })
+  }
   handelDetail = () => {
     console.log("hello from detail");
   };
   addToCart = () => {
     console.log("hello form add to cart");
   };
+
   render() {
     return (
       <ProductContext.Provider

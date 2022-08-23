@@ -7,7 +7,7 @@ class NavBar extends Component {
   state = {};
   render() {
     return (
-      <navWraper className="navbar navbar-expand-sm navbar-dark px-sm-5 bg-primary">
+      <NavWraper className="navbar navbar-expand-sm navbar-dark px-sm-5 bg-primary">
         {/* 
 https://www.iconfinder.com/icons/1243689/call_phone_icon
 Creative Commons (Attribution 3.0 Unported);
@@ -27,12 +27,12 @@ https://www.iconfinder.com/Makoto_msk */}
             <i className="fas fa-cart-plus mr-2">my cart</i>
           </ButtonContaier>
         </Link>
-      </navWraper>
+      </NavWraper>
     );
   }
 }
 
-const navWraper = styled.nav`
+const NavWraper = styled.nav`
     background:var(--mainBlue);
     .nav-link{
         color:var(--MainWhite) !important;

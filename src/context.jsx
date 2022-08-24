@@ -10,25 +10,32 @@ class ProductProvider extends Component {
     products: storeProducts,
     detailProduct: detailProduct,
   };
-  componentDidMount(){
-    this.setProducts()
+  componentDidMount() {
+    this.setProducts();
   }
 
   setProducts = () => {
     let tempProducts = [];
-    storeProducts.forEach(item => {
-      const singleItem ={ ...item};
-      tempProducts = [...tempProducts ,singleItem]
+    storeProducts.forEach((item) => {
+      const singleItem = { ...item };
+      tempProducts = [...tempProducts, singleItem];
     });
     this.setState(() => {
-      return {products:tempProducts};
-    })
-  }
-  handelDetail = () => {
-    console.log("hello from detail");
+      return { products: tempProducts };
+    });
   };
-  addToCart = () => {
-    console.log("hello form add to cart");
+  getItem = (id) => {
+    const product = this.state.products.find((item) => item.id === id);
+    return product;
+  };
+  handleDetail = (id) => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return { detailProduct: product };
+    });
+  };
+  addToCart = (id) => {
+    console.log(`hello form add to cart.id is ${id}`);
   };
 
   render() {
@@ -36,7 +43,7 @@ class ProductProvider extends Component {
       <ProductContext.Provider
         value={{
           ...this.state,
-          handelDetails: this.handelDetail,
+          handleDetail: this.handleDetail,
           addToCart: this.addToCart,
         }}>
         {this.props.children}

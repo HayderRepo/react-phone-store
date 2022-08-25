@@ -9,6 +9,12 @@ class ProductProvider extends Component {
   state = {
     products: storeProducts,
     detailProduct: detailProduct,
+    cart: [],
+    modalOpen: false,
+    modalProdact: detailProduct,
+    cartSubTotal:0,
+    cartTax:0,
+    cartTotal:0,
   };
   componentDidMount() {
     this.setProducts();
@@ -35,8 +41,47 @@ class ProductProvider extends Component {
     });
   };
   addToCart = (id) => {
-    console.log(`hello form add to cart.id is ${id}`);
+    let tempProducts = [...this.state.products];
+    const index = tempProducts.indexOf(this.getItem(id));
+    const product = tempProducts[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    this.setState(
+      () => {
+        return { products: tempProducts, cart: [...this.state.cart, product] };
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
+
+  openModal = (id) => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return { modalProduct: product, modalOpen: true };
+    });
+  };
+
+  closeModal = () => {
+    this.setState(() => {
+      return { modalOpen: false };
+    });
+  };
+  increment =(id) => {
+    console.log('this is the increment method')
+  }
+  decrement =(id) => {
+    console.log('this is the decrement method')
+  }
+  removeItem =(id) =>{
+    console.log("this is remove item")
+  }
+  clearCart =() =>{
+    console.log('cart was cleard')
+  }
 
   render() {
     return (
@@ -45,6 +90,13 @@ class ProductProvider extends Component {
           ...this.state,
           handleDetail: this.handleDetail,
           addToCart: this.addToCart,
+          openModal: this.openModal,
+          closeModal: this.closeModal,
+          increment:this.increment,
+          decrement:this.decrement,
+          removeItem:this.removeItem,
+          clearCart:this.clearCart
+
         }}>
         {this.props.children}
       </ProductContext.Provider>
@@ -55,3 +107,4 @@ class ProductProvider extends Component {
 const ProductConsumer = ProductContext.Consumer;
 
 export { ProductProvider, ProductConsumer };
+

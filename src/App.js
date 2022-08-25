@@ -5,8 +5,9 @@ import React from "react";
 import Details from "./components/details";
 import NavBar from "./components/navBar";
 import ProductList from "./components/productList";
-import Cart from "./components/cart";
+import Cart from "./components/cart/cart";
 import Default from "./components/default";
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route element={<Default />} />
       </Routes>
+      <Modal />
     </React.Fragment>
   );
 }

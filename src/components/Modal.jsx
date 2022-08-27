@@ -5,13 +5,12 @@ import { ButtonContaier } from "./button";
 import { Link } from "react-router-dom";
 
 class Modal extends Component {
-  state = {};
   render() {
     return (
       <ProductConsumer>
         {(value) => {
           const { modalOpen, closeModal } = value;
-          const { img, title, price } = value.modalProdact;
+          const { img, title, price } = value.modalProduct;
           if (!modalOpen) {
             return null;
           } else {
@@ -23,9 +22,9 @@ class Modal extends Component {
                       id="modal"
                       className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
                       <h5>item added to the cart</h5>
-                      <img src={img} classNameimg-fluid alt="product" />
+                      <img src={img} alt="product" />
                       <h5>{title}</h5>
-                      <h5 className="text-muted"> price : $</h5>
+                      <h5 className="text-muted"> price : {price} $</h5>
                       <Link to="/">
                         <ButtonContaier onClick={() => closeModal()}>
                           store
@@ -42,7 +41,6 @@ class Modal extends Component {
               </ModalContaier>
             );
           }
-          return;
         }}
       </ProductConsumer>
     );
